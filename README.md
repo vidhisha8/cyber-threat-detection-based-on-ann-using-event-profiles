@@ -1,58 +1,119 @@
 # Cyber Threat Detection Based on ANN Using Event Profiles
 
-## What is this project about?
-This was my third-year B.Tech project focused on applying Machine Learning and Deep Learning to cybersecurity.
+## About the Project
 
-Traditional rule-based security systems generate massive volumes of false alarms, causing security analysts to waste time investigating benign alerts. The goal of this project was to build an AI-assisted SIEM (Security Information and Event Management) prototype capable of separating actual cyber threats from background noise with high precision.
+This project explores the use of Machine Learning and Deep Learning for cybersecurity threat detection.
 
-## What I built
-A full-stack **Django** web application that:
-1. Ingests raw security event logs (~10,000 records) and preprocesses them into structured numerical event profiles using **TF-IDF feature extraction**.
-2. Trains and benchmarks **5 traditional Machine Learning classifiers** against **Deep Learning architectures (ANN/FCNN and LSTM)** using an 80/20 stratified train-test split.
-3. Provides an interactive web dashboard allowing users to upload datasets, trigger model training/evaluation modules, and compare performance metrics (Accuracy, Precision, Recall, and F1-Score).
+Traditional security monitoring systems can generate large numbers of alerts, making it challenging to identify potentially malicious activity. The project investigates an AI-assisted Security Information and Event Management (SIEM) approach that processes security event data and applies classification techniques to distinguish between different event categories.
 
-## Model Benchmarking Results
-I evaluated 7 classification models on the processed event profiles:
+The main objective is to explore how event profiling, text-based feature extraction, and neural network models can support automated cyber threat detection.
 
-| Model Category | Algorithm | Performance Summary |
-| :--- | :--- | :--- |
-| **Deep Learning** | **LSTM (Long Short-Term Memory)** | **Best — 94% Accuracy** (Highest Precision, Recall & F1-Score) |
-| **Deep Learning** | **ANN / FCNN (Fully Connected Network)** | **Second Best** — Strong baseline neural performance |
-| **Machine Learning** | **Random Forest** | Competitive ensemble performance |
-| **Machine Learning** | **Support Vector Machine (SVM)** | Moderate classification accuracy |
-| **Machine Learning** | **K-Nearest Neighbors (KNN)** | Moderate performance on high-dimensional vectors |
-| **Machine Learning** | **Naive Bayes** | Lower accuracy due to feature independence assumptions |
-| **Machine Learning** | **Decision Tree** | Prone to overfitting on raw log features |
+## Project Objectives
 
-The **LSTM** architecture outperformed conventional baselines across accuracy, precision, recall, and F-measure by effectively capturing sequential patterns across the vectorized event logs.
+- Process security event data into structured numerical representations.
+- Apply TF-IDF-based feature extraction to prepare event data for classification.
+- Explore traditional Machine Learning and Deep Learning approaches to threat detection.
+- Compare classification approaches using metrics such as accuracy, precision, recall, and F-measure.
+- Investigate the use of Artificial Neural Networks (ANNs) and LSTM networks for security event classification.
 
-## Dataset Overview
-* **Volume:** ~10,000 network security event log records
-* **Validation Strategy:** 80/20 Train-Test Split (~8,000 training records / 2,000 testing records)
+## Technologies Used
 
-## Tech Stack
-* **Programming Language:** Python
-* **Web Framework:** Django (HTML/CSS Frontend, Python Backend)
-* **Deep Learning:** TensorFlow / Keras (LSTM, ANN / Multi-Layer Perceptron)
-* **Machine Learning:** Scikit-Learn (Random Forest, SVM, KNN, Naive Bayes, Decision Tree)
-* **Data Processing & Feature Extraction:** Pandas, NumPy, Scikit-Learn (`TfidfVectorizer`)
-* **Visualization:** Matplotlib
+The project presentation identifies the following technologies and tools:
 
-## How to Run Locally
+- **Programming Language:** Python
+- **Web Framework:** Django
+- **Frontend:** HTML, CSS, JavaScript
+- **Data Processing:** Pandas, NumPy
+- **Feature Extraction:** TF-IDF
+- **Machine Learning:** Scikit-learn
+- **Deep Learning:** TensorFlow / Keras
+- **Visualization:** Matplotlib
+- **Database:** MySQL (listed in the project presentation)
 
-```bash
-# 1. Clone the repository
-git clone [https://github.com/vidhisha8/cyber-threat-detection-ann.git](https://github.com/vidhisha8/cyber-threat-detection-ann.git)
-cd cyber-threat-detection-ann
+The actual implementation of each component should be confirmed against the source code before treating the complete stack as verified.
 
-# 2. Install required dependencies
-pip install -r requirements.txt
+## Methodology
 
-# 3. Run database migrations (if running for the first time)
-python manage.py migrate
+### 1. Security Event Data
 
-# 4. Start the Django development server
-python manage.py runserver
+The project presentation describes a dataset named `kdd_train.csv` containing approximately 10,000 security event records.
 
-# 5. Open in your browser
-# [http://127.0.0.1:8000](http://127.0.0.1:8000)
+The dataset is used as the basis for preprocessing, event representation, and classification experiments.
+
+### 2. Data Preprocessing and Feature Extraction
+
+The documented workflow uses TF-IDF (Term Frequency–Inverse Document Frequency) to convert text-based event information into numerical feature representations suitable for classification.
+
+These representations provide input features for the evaluated Machine Learning and Deep Learning approaches.
+
+### 3. Model Evaluation
+
+The project explores the following classification approaches.
+
+**Traditional Machine Learning**
+
+- Random Forest
+- Support Vector Machine (SVM)
+- K-Nearest Neighbors (KNN)
+- Naive Bayes
+- Decision Tree
+
+**Deep Learning**
+
+- Artificial Neural Network (ANN) / Fully Connected Neural Network (FCNN)
+- Long Short-Term Memory (LSTM)
+
+The project presentation discusses comparing these approaches using accuracy, precision, recall, and F-measure.
+
+## Dataset and Evaluation Setup
+
+| Item | Details reported in the presentation |
+|---|---|
+| Dataset | `kdd_train.csv` |
+| Number of records | 9,999 |
+| Training records | 7,999 |
+| Testing records | 2,000 |
+| Approximate split | 80% training / 20% testing |
+
+The record counts above are taken from the project presentation. The exact preprocessing procedure and whether the split was stratified should be verified against the implementation.
+
+## Reported Results
+
+The project presentation reports an LSTM accuracy of approximately **94% during training**.
+
+This is a reported training result, not an independently reproduced result or a confirmed held-out test accuracy. A complete comparison of the models would require the corresponding evaluation outputs for each model.
+
+Accuracy, precision, recall, and F-measure are relevant metrics for evaluating classification performance, particularly when the dataset contains imbalanced classes.
+
+## Challenges and Considerations
+
+- Preparing security event data for numerical feature extraction.
+- Representing event information in a form suitable for classification.
+- Comparing conventional Machine Learning algorithms with neural network approaches.
+- Evaluating classification results using multiple performance metrics.
+- Avoiding conclusions based on accuracy alone when class distributions may be imbalanced.
+
+## Limitations
+
+- The reported results have not been independently reproduced here.
+- The presentation's reported LSTM training accuracy does not establish its performance on unseen data.
+- The effectiveness of the models depends on the quality, labels, and distribution of the dataset.
+- The available project documents do not independently establish the performance of every listed model.
+- The complete implementation of the Django interface, database integration, and model-training workflow should be verified against the source code.
+
+## Future Improvements
+
+- Evaluate every model on the same held-out test dataset.
+- Report per-model accuracy, precision, recall, and F1-score.
+- Use confusion matrices to examine false positives and false negatives.
+- Validate the approach on additional security datasets.
+- Improve preprocessing and event representation where needed.
+- Further investigate neural network architectures for security event classification.
+- Improve the usability and reporting of the application interface.
+
+## About
+
+This project was developed as part of my third-year B.Tech academic work, exploring the application of Machine Learning and Deep Learning to cybersecurity.
+
+**Author:** Mantravadi Vidhisha
+
